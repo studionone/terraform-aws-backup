@@ -1,14 +1,26 @@
 # AWS backup module for Terraform
 
-This module provides a simple configuration for using [AWS Backup Plans](https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html) with Terraform projects.
+This module provides a simple configuration for using [AWS Backup Plans][1] with Terraform projects.
 
-By default the backup plan adds rules for the following backup schedules:
+By default the module creates backup plan rules for the following schedules:
 
 | Schedule                     | Retention    |
 |:-----------------------------|:-------------|
 | Every second hour            | One day      |
 | Daily at midnight            | One week     |
 | Weekly on Sunday at midnight | Three months |
+
+## Supported resources
+
+The following AWS resources are supported by AWS backup plans:
+
+- EFS file systems
+- DynamoDB tables
+- EBS volumes
+- RDS databases (except Amazon Aurora)
+- Storage Gateway volumes
+
+For an up-to-date list of supported resources refer to the AWS Backup Plans [documentation][2].
 
 ## Setup instructions
 
@@ -19,3 +31,6 @@ By default the backup plan adds rules for the following backup schedules:
 5. Log into your AWS console and check the plan was create successfully
 
 Refer to [`main.example.tf`](./main.example.tf) for details of the module configuration.
+
+[1]: https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html
+[2]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#supported-resources
