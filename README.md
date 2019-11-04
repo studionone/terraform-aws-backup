@@ -22,13 +22,13 @@ The following AWS resources are supported by AWS backup plans:
 - RDS databases (except Amazon Aurora)
 - Storage Gateway volumes
 
-For an up-to-date list of supported resources refer to the AWS Backup Plans [documentation][2].
+For an up-to-date list of supported resources, refer to the AWS Backup Plans [documentation][2].
 
 ## Setup instructions
 
 1. Add a `module` section to your production `main.tf` file
 2. Specify the `env`, `project` and `resources` variables to configure the backup
-3. Run `terraform plan` and `terraform apply` to deploy the backup plan
+3. Run `terraform init`, `terraform plan` and `terraform apply` to deploy the backup plan
 4. Log into your AWS console and check the plan was created successfully
 
 ### Configuration options
@@ -58,7 +58,7 @@ module "backups" {
   tags = module.deployment.common_tags
   hourly_period = 12
   daily_time = 14 # This is in UTC
-  max_retension = 30
+  max_retention = 30
 }
 ```
 
