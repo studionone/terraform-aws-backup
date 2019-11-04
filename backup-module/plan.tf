@@ -7,7 +7,7 @@ resource "aws_backup_plan" "backup_plan" {
     target_vault_name = aws_backup_vault.hourly_backup_vault.name
 
     # Every second hour on the hour; keep for one day
-    schedule = "cron(0 */2 * * ? *)"
+    schedule = "cron(0 */${var.hourly_period} * * ? *)"
     lifecycle {
       delete_after = 1
     }
@@ -18,7 +18,7 @@ resource "aws_backup_plan" "backup_plan" {
     target_vault_name = aws_backup_vault.daily_backup_vault.name
 
     # Every day at midnight; keep for one week
-    schedule = "cron(0 0 * * ? *)"
+    schedule = "cron(0 ${var.daily_time} * * ? *)"
     lifecycle {
       delete_after = 7
     }
@@ -29,9 +29,9 @@ resource "aws_backup_plan" "backup_plan" {
     target_vault_name = aws_backup_vault.weekly_backup_vault.name
 
     # Every Sunday at midnight; keep for three months
-    schedule = "cron(0 0 ? * 1 *)"
+    schedule = "cron(0 ${var.daily_time} ? * 1 *)"
     lifecycle {
-      delete_after = 90
+      delete_after = var.max_retention
     }
   }
 }
