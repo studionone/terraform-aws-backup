@@ -16,5 +16,5 @@ data "aws_iam_policy_document" "backup_assume_role_policy" {
 
 resource "aws_iam_role_policy_attachment" "backup_policy_attachment" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
-  role = "${aws_iam_role.backup_role.name}"
+  role = aws_iam_role.backup_role.name
 }
