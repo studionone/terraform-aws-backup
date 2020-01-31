@@ -1,6 +1,6 @@
 variable env {
   description = "The project environment, for use in backup plan names"
-  type = "string"
+  type = string
 }
 
 variable project {
